@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(kiroku)
+project(first_interfaces)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -17,37 +17,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
-
-set(msg_files
-  "msg/log.msg
-)
 
 rosidl_generate_interfaces(
   ${PROJECT_NAME}
-  ${msg_files}
-)
-
-ament_export_dependencies(
-  rosidl_default_runtime
-)
-
-add_executable(
-  subscribe_log src/subscriber_log.cpp
-)
-ament_target_dependencies(subscribe_log
-  "rclcpp"
-)
-
-install(TARGETS
-  subscribe_log
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-rosidl_target_interfaces(subscribe_log
-  ${PROJECT_NAME}
-  "rosidl_typesupport_cpp"
+  "msg/Log.msg"
 )
 
 if(BUILD_TESTING)

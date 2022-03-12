@@ -20,7 +20,7 @@ using namespace std::chrono_literals;
     auto message = first_interfaces::msg::Log();
     message.filename = "anaz";
     message.message_log = "ppp";
-    message.level = "INfo";
+    message.level = "INFO";
     message.time = "500";
     publisher_->publish(message);
   }

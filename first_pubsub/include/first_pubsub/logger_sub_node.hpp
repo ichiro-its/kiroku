@@ -11,8 +11,9 @@ public:
     LoggerSub();
 
 private:
-    void topic_callback(const first_interfaces::msg::Log::SharedPtr msg) const;
+    // void filter_log(const first_interfaces::msg::Log::SharedPtr msg) const;
 
+    void topic_callback(const first_interfaces::msg::Log::SharedPtr msg) const;
 
     rclcpp::Subscription<first_interfaces::msg::Log>::SharedPtr subscription_;
 };

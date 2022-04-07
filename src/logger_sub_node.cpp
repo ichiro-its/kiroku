@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <string>
+#include <string.h>
 #include <nlohmann/json.hpp>
 
 using std::placeholders::_1;
@@ -30,9 +30,19 @@ json jsn_lg = {};
         RCLCPP_INFO(this->get_logger(), "filename: '%s'\nmessage log: '%s'\nlevel: '%s'\ntime: '%s'",
         msg->filename, msg->message_log, msg->level, msg->time);
 
-        enum LogLevel log_level;
-        log_level = INFO;
-        int filter_level = 0;
+        int log_level;
+        if(msg->level.compare("DEBUG") == 0)
+            log_level = 0;
+        else if(msg->level.compare("INFO") == 0)
+            log_level = 1;
+        else if(msg->level.compare("WARN") == 0)
+            log_level = 2;
+        else if(msg->level.compare("ERROR") == 0)
+            log_level = 3;
+        else if(msg->level.compare("FATAL") == 0)
+            log_level = 4;
+
+        LogLevel filter_level = WARN;
 
         if(log_level >= filter_level)
         {

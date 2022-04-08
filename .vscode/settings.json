@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "iosfwd": "cpp",
-        "memory": "cpp",
-        "functional": "cpp"
-    },
-    "C_Cpp.dimInactiveRegions": false
-}

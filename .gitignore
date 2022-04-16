@@ -50,30 +50,4 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
-# c_cpp_properties.json
-{
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-x64"
-        }
-    ],
-    "version": 4
-}
-
-#settings.json
-{
-    "files.associations": {
-        "iosfwd": "cpp",
-        "memory": "cpp",
-        "functional": "cpp"
-    },
-    "C_Cpp.dimInactiveRegions": false
-}
+.vscode

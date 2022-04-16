@@ -1,10 +1,9 @@
 name: Build and Test Nightly
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [master]
+on:
   push:
-    branches: [master]
+    branches: ['**']
 jobs:
   build-and-test-nightly:
     runs-on: ubuntu-latest

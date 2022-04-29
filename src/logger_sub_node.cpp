@@ -24,7 +24,6 @@ LoggerSub::LoggerSub()
 
 }
 
-
 void LoggerSub::topic_callback(const kiroku_interfaces::msg::Log::SharedPtr msg) const
 {
   RCLCPP_INFO(

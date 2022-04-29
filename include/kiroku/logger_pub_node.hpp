@@ -2,7 +2,7 @@
 #define KIROKU__LOGGER_PUB_NODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
-#include "kiroku_interfaces/msg/log.hpp"     // CHANGE
+#include "kiroku_interfaces/msg/log.hpp"
 
 class LoggerPub : public rclcpp::Node
 {

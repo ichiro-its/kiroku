@@ -40,5 +40,5 @@ jobs:
           password: ${{ secrets.SSH_PASS }}
           script: |
             cd ${{ secrets.SERVER_REPO_DIR }}/debian
-            reprepro includedeb stable ~/temp/stable/akushon/package/*.deb
+            reprepro includedeb stable ~/temp/stable/kiroku/package/*.deb
             rm -rf ~/temp/stable/kiroku/

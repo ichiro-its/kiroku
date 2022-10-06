@@ -3,17 +3,15 @@
 <package format="3">
   <name>kiroku</name>
   <version>0.0.0</version>
-  <description>Logger Package</description>
-  <maintainer email="azharanas173@gmail.com">azharanas17</maintainer>
+  <description>Logger Package for ROS 2 Project</description>
+  <maintainer email="azharanas173@gmail.com">naz17</maintainer>
   <license>MIT License</license>
-
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>nlohmann-json-dev</depend>
   <depend>rclcpp</depend>
   <depend>kiroku_interfaces</depend>
-
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-
   <export>
     <build_type>ament_cmake</build_type>
   </export>

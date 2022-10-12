@@ -18,22 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KIROKU__LOGGER_PUBLISHER_HPP_
-#define KIROKU__LOGGER_PUBLISHER_HPP_
+#include <memory>
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
+#include "logger_publisher.hpp"
 
-class LoggerPublisher : public rclcpp::Node
+int main(int argc, char * argv[])
 {
-public:
-  LoggerPublisher();
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<LoggerPublisher>());
+  rclcpp::shutdown();
 
-private:
-  void topic_callback();
-
-  rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Publisher<kiroku_interfaces::msg::Logger>::SharedPtr publisher_;
-  size_t count_;
-};
-#endif  // KIROKU__LOGGER_PUBLISHER_HPP_
+  return 0;
+}

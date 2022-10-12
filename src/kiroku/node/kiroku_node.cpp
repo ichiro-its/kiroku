@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "kiroku/kiroku_node.hpp"
+#include "kiroku/node/kiroku_node.hpp"
 #include <string.h>
 #include <nlohmann/json.hpp>
 #include <iostream>

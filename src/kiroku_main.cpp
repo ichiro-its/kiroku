@@ -22,7 +22,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
-#include "kiroku/kiroku_node.hpp"
+#include "kiroku/node/kiroku_node.hpp"
 
 int main(int argc, char * argv[])
 {

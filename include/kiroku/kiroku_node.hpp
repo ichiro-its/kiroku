@@ -18,17 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <memory>
+#ifndef KIROKU__KIROKU_NODE_HPP_
+#define KIROKU__KIROKU_NODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
-#include "kiroku/logger_subscriber.hpp"
 
-int main(int argc, char * argv[])
+class KirokuNode : public rclcpp::Node
 {
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<LoggerSubscriber>());
-  rclcpp::shutdown();
+public:
+  KirokuNode();
 
-  return 0;
-}
+private:
+  void topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const;
+
+  rclcpp::Subscription<kiroku_interfaces::msg::Logger>::SharedPtr subscription_;
+};
+#endif  // KIROKU__KIROKU_NODE_HPP_

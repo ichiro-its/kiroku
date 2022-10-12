@@ -20,7 +20,7 @@ find_package(rclcpp REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
   "src/kiroku/logger_publisher.cpp"
-  "src/kiroku/logger_subscriber.cpp")
+  "src/kiroku/kiroku_node.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -45,15 +45,15 @@ target_include_directories(publisher_main PUBLIC
   $<INSTALL_INTERFACE:include>)
 target_link_libraries(publisher_main ${PROJECT_NAME})
 
-add_executable(subscriber_main "src/subscriber_main.cpp")
-target_include_directories(subscriber_main PUBLIC
+add_executable(kiroku_main "src/kiroku_main.cpp")
+target_include_directories(kiroku_main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(subscriber_main ${PROJECT_NAME})
+target_link_libraries(kiroku_main ${PROJECT_NAME})
 
 install(TARGETS
   publisher_main
-  subscriber_main
+  kiroku_main
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "kiroku/logger_subscriber.hpp"
+#include "kiroku/kiroku_node.hpp"
 #include <string.h>
 #include <nlohmann/json.hpp>
 #include <iostream>
@@ -40,14 +40,14 @@ enum LoggerLevel
 };
 json json_log = {};
 
-LoggerSubscriber::LoggerSubscriber()
-: Node("logger_subscriber")
+KirokuNode::KirokuNode()
+: Node("kiroku_node")
 {
   subscription_ = this->create_subscription<kiroku_interfaces::msg::Logger>(
-    "topic", 10, std::bind(&LoggerSubscriber::topic_callback, this, _1)
+    "topic", 10, std::bind(&KirokuNode::topic_callback, this, _1)
   );
 }
-void LoggerSubscriber::topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const
+void KirokuNode::topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const
 {
   RCLCPP_INFO(
     this->get_logger(), "filename: '%s'\nmessage log: '%s'\nlevel: '%s'\ntime: '%s'",

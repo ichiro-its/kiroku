@@ -14,7 +14,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(ament_index_cpp REQUIRED)
 find_package(kiroku_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 
@@ -27,7 +26,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>)
 
 ament_target_dependencies(${PROJECT_NAME}
-  ament_index_cpp
   rclcpp
   kiroku_interfaces)
 
@@ -62,7 +60,6 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_dependencies(
-  ament_index_cpp
   rclcpp
   kiroku_interfaces)
 ament_export_include_directories("include")

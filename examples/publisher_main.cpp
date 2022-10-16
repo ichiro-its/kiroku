@@ -22,12 +22,12 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
-#include "logger_publisher.hpp"
+#include "kiroku/examples/node/publisher_node.hpp"
 
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<LoggerPublisher>());
+  rclcpp::spin(std::make_shared<PublisherNode>());
   rclcpp::shutdown();
 
   return 0;

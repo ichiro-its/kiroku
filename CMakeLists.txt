@@ -19,7 +19,7 @@ find_package(kiroku_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
-  "examples/logger_publisher.cpp"
+  "src/kiroku/examples/node/publisher_node.cpp"
   "src/kiroku/node/kiroku_node.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -43,7 +43,7 @@ add_executable(publisher_main "examples/publisher_main.cpp")
 target_include_directories(publisher_main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(publisher_main ${PROJECT_NAME})  
+target_link_libraries(publisher_main ${PROJECT_NAME})
 
 add_executable(kiroku_main "src/kiroku_main.cpp")
 target_include_directories(kiroku_main PUBLIC

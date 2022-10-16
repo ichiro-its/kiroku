@@ -18,22 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef LOGGER_PUBLISHER_HPP_
-#define LOGGER_PUBLISHER_HPP_
+#include <chrono>
+#include <memory>
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
+#include "kiroku/examples/node/publisher_node.hpp"
 
-class LoggerPublisher : public rclcpp::Node
+using std::placeholders::_1;
+using namespace std::chrono_literals;
+
+PublisherNode::PublisherNode()
+: Node("publisher_node")
 {
-public:
-  LoggerPublisher();
+  publisher_ = this->create_publisher<kiroku_interfaces::msg::Logger>("topic", 10);
+  timer_ = this->create_wall_timer(500ms, std::bind(&PublisherNode::topic_callback, this));
+}
 
-private:
-  void topic_callback();
-
-  rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Publisher<kiroku_interfaces::msg::Logger>::SharedPtr publisher_;
-  size_t count_;
-};
-#endif  // LOGGER_PUBLISHER_HPP_
+void PublisherNode::topic_callback()
+{
+  auto message = kiroku_interfaces::msg::Logger();
+  message.filename = "logger";
+  message.message_logger = "this message";
+  message.level = "INFO";
+  message.time = "1000";
+  publisher_->publish(message);
+}

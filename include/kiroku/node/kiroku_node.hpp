@@ -30,8 +30,7 @@ public:
   KirokuNode();
 
 private:
-  void topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const;
-
   rclcpp::Subscription<kiroku_interfaces::msg::Logger>::SharedPtr subscription_;
+
 };
 #endif  // KIROKU__NODE__KIROKU_NODE_HPP_

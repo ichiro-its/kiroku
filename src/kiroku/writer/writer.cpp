@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "kiroku/node/kiroku_node.hpp"
 #include "kiroku/writer/writer.hpp"
 #include <string.h>
 #include <nlohmann/json.hpp>
@@ -28,12 +27,58 @@
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
 
-using std::placeholders::_1;
+using json = nlohmann::json;
+// using std::placeholders::_1;
 
-KirokuNode::KirokuNode()
-: Node("kiroku_node")
+enum LoggerLevel
 {
-  subscription_ = this->create_subscription<kiroku_interfaces::msg::Logger>(
-    "topic", 10, std::bind(&Writer::topic_callback, this, _1)
-  );
+  DEBUG,
+  INFO,
+  WARN,
+  ERROR,
+  FATAL
+};
+json json_log = {};
+
+Writer::Writer()
+{
+}
+
+void Writer::topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const
+{
+  RCLCPP_INFO(
+    this->get_logger(), "filename: '%s'\nmessage log: '%s'\nlevel: '%s'\ntime: '%s'",
+    msg->filename, msg->message_logger, msg->level, msg->time);
+
+  int logger_level = 0;
+  if (msg->level.compare("DEBUG") == 0) {
+    logger_level = 0;
+  } else if (msg->level.compare("INFO") == 0) {
+    logger_level = 1;
+  } else if (msg->level.compare("WARN") == 0) {
+    logger_level = 2;
+  } else if (msg->level.compare("ERROR") == 0) {
+    logger_level = 3;
+  } else if (msg->level.compare("FATAL") == 0) {
+    logger_level = 4;
+  }
+
+  LoggerLevel filter_level = INFO;
+
+  if (logger_level >= filter_level) {
+    std::ofstream file_logger;
+    file_logger.open(
+      "src/kiroku/" + msg->filename + ".log",
+      std::ios_base::trunc | std::ios_base::out);
+
+    json_log += {
+      {"message_log", msg->message_logger},
+      {"level", msg->level},
+      {"time", msg->time}
+    };
+
+    file_logger << json_log.dump();
+
+    file_logger.close();
+  }
 }

@@ -18,22 +18,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "kiroku/node/kiroku_node.hpp"
-#include "kiroku/writer/writer.hpp"
-#include <string.h>
-#include <nlohmann/json.hpp>
-#include <iostream>
-#include <fstream>
-#include <iomanip>
+#ifndef KIROKU__WRITER__WRITER_HPP_
+#define KIROKU__WRITER__WRITER_HPP_
+
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
 
-using std::placeholders::_1;
-
-KirokuNode::KirokuNode()
-: Node("kiroku_node")
+class Writer : public KirokuNode
 {
-  subscription_ = this->create_subscription<kiroku_interfaces::msg::Logger>(
-    "topic", 10, std::bind(&Writer::topic_callback, this, _1)
-  );
-}
+public:
+    Writer();
+    void topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const;
+
+private:
+
+};
+
+#endif // KIROKU__WRITER__WRITER_HPP_
+

@@ -21,18 +21,17 @@
 #ifndef KIROKU__WRITER__WRITER_HPP_
 #define KIROKU__WRITER__WRITER_HPP_
 
+#include <cstring>
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
 
 class Writer : public KirokuNode
 {
 public:
-    Writer();
-    void topic_callback(const kiroku_interfaces::msg::Logger::SharedPtr msg) const;
+  Writer();
+  void write_to_file();
 
 private:
-
 };
 
-#endif // KIROKU__WRITER__WRITER_HPP_
-
+#endif  // KIROKU__WRITER__WRITER_HPP_

@@ -31,6 +31,5 @@ public:
 
 private:
   rclcpp::Subscription<kiroku_interfaces::msg::Logger>::SharedPtr subscription_;
-
 };
 #endif  // KIROKU__NODE__KIROKU_NODE_HPP_

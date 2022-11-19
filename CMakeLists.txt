@@ -19,7 +19,8 @@ find_package(rclcpp REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
   "src/kiroku/examples/node/publisher_node.cpp"
-  "src/kiroku/node/kiroku_node.cpp")
+  "src/kiroku/node/kiroku_node.cpp"
+  "src/kiroku/writer/writer.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

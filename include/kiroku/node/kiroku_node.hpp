@@ -23,6 +23,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
+#include "kiroku/writer/writer.hpp"
 
 class KirokuNode : public rclcpp::Node
 {
@@ -31,5 +32,7 @@ public:
 
 private:
   rclcpp::Subscription<kiroku_interfaces::msg::Logger>::SharedPtr subscription_;
+
+  Writer write;
 };
 #endif  // KIROKU__NODE__KIROKU_NODE_HPP_

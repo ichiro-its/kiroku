@@ -21,17 +21,29 @@
 #ifndef KIROKU__WRITER__WRITER_HPP_
 #define KIROKU__WRITER__WRITER_HPP_
 
-#include <cstring>
-#include "rclcpp/rclcpp.hpp"
-#include "kiroku_interfaces/msg/logger.hpp"
+#include <string>
 
-class Writer : public KirokuNode
+enum LoggerLevel
+{
+  DEBUG,
+  INFO,
+  WARN,
+  ERROR,
+  FATAL
+};
+
+class Writer
 {
 public:
   Writer();
-  void write_to_file();
+  void write_to_file(
+    std::string filename, std::string message_logger, std::string level,
+    std::string time);
 
 private:
+  int logger_level;
+
+  LoggerLevel filter_level = INFO;
 };
 
 #endif  // KIROKU__WRITER__WRITER_HPP_

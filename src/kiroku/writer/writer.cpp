@@ -20,24 +20,49 @@
 
 #include "kiroku/writer/writer.hpp"
 #include <nlohmann/json.hpp>
-#include <iostream>
 #include <fstream>
-#include <iomanip>
 #include <string>
-#include "rclcpp/rclcpp.hpp"
-#include "kiroku_interfaces/msg/logger.hpp"
 
-// using std::placeholders::_1;
+using json = nlohmann::json;
 
+json json_log = {};
 
 Writer::Writer()
 {
 }
 
 void Writer::write_to_file(
-  string filename,
-  string message_logger,
-  string level,
-  string time)
+  std::string filename,
+  std::string message_logger,
+  std::string level,
+  std::string time)
 {
+  if (level.compare("DEBUG") == 0) {
+    logger_level = 0;
+  } else if (level.compare("INFO") == 0) {
+    logger_level = 1;
+  } else if (level.compare("WARN") == 0) {
+    logger_level = 2;
+  } else if (level.compare("ERROR") == 0) {
+    logger_level = 3;
+  } else if (level.compare("FATAL") == 0) {
+    logger_level = 4;
+  }
+
+  if (logger_level >= filter_level) {
+    std::ofstream file_logger;
+    file_logger.open(
+      "src/kiroku/" + filename + ".log",
+      std::ios_base::trunc | std::ios_base::out);
+
+    json_log += {
+      {"message_log", message_logger},
+      {"level", level},
+      {"time", time}
+    };
+
+    file_logger << json_log.dump();
+
+    file_logger.close();
+  }
 }

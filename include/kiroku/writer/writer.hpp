@@ -37,7 +37,8 @@ class Writer
 public:
   Writer();
   void write_to_file(
-    const std::string &filename, const std::string &message_logger, const std::string &level, const std::string &time);
+    const std::string & filename, const std::string & message_logger, const std::string & level,
+    const std::string & time);
 
 private:
   int logger_level;

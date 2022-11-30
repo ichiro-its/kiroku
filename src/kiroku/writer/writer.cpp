@@ -22,12 +22,13 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 
 using nlohmann::json;
 
 json json_log = {};
 
-std::unordered_map<std::string, int> string_to_log_level 
+std::unordered_map<std::string, int> string_to_log_level
 {
   {"DEBUG", 0},
   {"INFO", 1},
@@ -41,7 +42,8 @@ Writer::Writer()
 }
 
 void Writer::write_to_file(
-  const std::string &filename, const std::string &message_logger, const std::string &level, const std::string &time)
+  const std::string & filename, const std::string & message_logger, const std::string & level,
+  const std::string & time)
 {
   logger_level = string_to_log_level[level];
 

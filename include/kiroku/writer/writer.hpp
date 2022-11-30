@@ -37,13 +37,12 @@ class Writer
 public:
   Writer();
   void write_to_file(
-    std::string filename, std::string message_logger, std::string level,
-    std::string time);
+    const std::string &filename, const std::string &message_logger, const std::string &level, const std::string &time);
 
 private:
   int logger_level;
 
-  LoggerLevel filter_level = INFO;
+  int filter_level = INFO;
 };
 
 #endif  // KIROKU__WRITER__WRITER_HPP_

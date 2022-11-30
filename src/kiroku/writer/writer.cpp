@@ -23,31 +23,27 @@
 #include <fstream>
 #include <string>
 
-using json = nlohmann::json;
+using nlohmann::json;
 
 json json_log = {};
+
+std::unordered_map<std::string, int> string_to_log_level 
+{
+  {"DEBUG", 0},
+  {"INFO", 1},
+  {"WARN", 2},
+  {"ERROR", 3},
+  {"FATAL", 4},
+};
 
 Writer::Writer()
 {
 }
 
 void Writer::write_to_file(
-  std::string filename,
-  std::string message_logger,
-  std::string level,
-  std::string time)
+  const std::string &filename, const std::string &message_logger, const std::string &level, const std::string &time)
 {
-  if (level.compare("DEBUG") == 0) {
-    logger_level = 0;
-  } else if (level.compare("INFO") == 0) {
-    logger_level = 1;
-  } else if (level.compare("WARN") == 0) {
-    logger_level = 2;
-  } else if (level.compare("ERROR") == 0) {
-    logger_level = 3;
-  } else if (level.compare("FATAL") == 0) {
-    logger_level = 4;
-  }
+  logger_level = string_to_log_level[level];
 
   if (logger_level >= filter_level) {
     std::ofstream file_logger;

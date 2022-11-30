@@ -23,15 +23,6 @@
 
 #include <string>
 
-enum LoggerLevel
-{
-  DEBUG,
-  INFO,
-  WARN,
-  ERROR,
-  FATAL
-};
-
 class Writer
 {
 public:
@@ -43,7 +34,7 @@ public:
 private:
   int logger_level;
 
-  int filter_level = INFO;
+  int filter_level;
 };
 
 #endif  // KIROKU__WRITER__WRITER_HPP_

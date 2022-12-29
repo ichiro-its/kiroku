@@ -1,8 +1,7 @@
 name: Build and Test Nightly
 on:
   workflow_dispatch:
-  push:
-    branches: ["**"]
+  push: ["**"]
 jobs:
   build-and-test-nightly:
     runs-on: ubuntu-20.04

@@ -24,10 +24,6 @@
 #include <fstream>
 #include <iomanip>
 #include "nlohmann/json.hpp"
-#include "rclcpp/rclcpp.hpp"
-#include "kiroku_interfaces/msg/logger.hpp"
-
-using std::placeholders::_1;
 
 KirokuNode::KirokuNode()
 : Node("kiroku_node")

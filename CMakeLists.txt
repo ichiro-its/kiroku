@@ -18,7 +18,7 @@ find_package(kiroku_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
-  "src/kiroku/examples/node/publisher_node.cpp"
+  "src/examples/node/publisher_node.cpp"
   "src/kiroku/node/kiroku_node.cpp"
   "src/kiroku/writer/writer.cpp")
 

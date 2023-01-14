@@ -1,29 +1,26 @@
 cmake_minimum_required(VERSION 3.5)
-project(first_pubsub)
+project(kiroku)
 
-# Default to C99
 if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)
 endif()
 
-# Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Wall -Wextra -Wpedantic -fPIC)
 endif()
 
-# find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(kiroku_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(first_interfaces REQUIRED)
-find_package(first_pubsub REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
-  "src/logger_pub_node.cpp"
-  "src/logger_sub_node.cpp")
+  "src/examples/node/publisher_node.cpp"
+  "src/kiroku/node/kiroku_node.cpp"
+  "src/kiroku/writer/writer.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -31,7 +28,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
-  first_interfaces)
+  kiroku_interfaces)
 
 install(DIRECTORY "include" DESTINATION ".")
 
@@ -41,21 +38,21 @@ install(TARGETS ${PROJECT_NAME}
   LIBRARY DESTINATION "lib"
   RUNTIME DESTINATION "bin")
 
-add_executable(loggerpub "src/logger_mainpub_node.cpp")
-target_include_directories(loggerpub PUBLIC
+add_executable(publisher_main "examples/publisher_main.cpp")
+target_include_directories(publisher_main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(loggerpub ${PROJECT_NAME})
+target_link_libraries(publisher_main ${PROJECT_NAME})
 
-add_executable(loggersub "src/logger_mainsub_node.cpp")
-target_include_directories(loggersub PUBLIC
+add_executable(kiroku_main "src/kiroku_main.cpp")
+target_include_directories(kiroku_main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(loggersub ${PROJECT_NAME})
+target_link_libraries(kiroku_main ${PROJECT_NAME})
 
-install (TARGETS
-  loggerpub
-  loggersub
+install(TARGETS
+  publisher_main
+  kiroku_main
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
@@ -64,7 +61,8 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_dependencies(
-  rclcpp)
+  rclcpp
+  kiroku_interfaces)
 ament_export_include_directories("include")
 ament_export_libraries(${PROJECT_NAME})
 ament_package()

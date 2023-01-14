@@ -23,7 +23,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
-#include "kiroku/examples/node/publisher_node.hpp"
+#include "examples/node/publisher_node.hpp"
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;

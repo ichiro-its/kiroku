@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KIROKU__EXAMPLES__NODE__PUBLISHER_NODE_HPP_
-#define KIROKU__EXAMPLES__NODE__PUBLISHER_NODE_HPP_
+#ifndef EXAMPLES__NODE__PUBLISHER_NODE_HPP_
+#define EXAMPLES__NODE__PUBLISHER_NODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "kiroku_interfaces/msg/logger.hpp"
@@ -36,4 +36,4 @@ private:
   rclcpp::Publisher<kiroku_interfaces::msg::Logger>::SharedPtr publisher_;
   size_t count_;
 };
-#endif  // KIROKU__EXAMPLES__NODE__PUBLISHER_NODE_HPP_
+#endif  // EXAMPLES__NODE__PUBLISHER_NODE_HPP_
